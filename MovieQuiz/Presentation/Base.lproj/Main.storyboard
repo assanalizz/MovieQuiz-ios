@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="24765" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina6_1" orientation="portrait" appearance="dark"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24743"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -15,13 +15,90 @@
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1/10" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WMs-qe-KSl">
+                                <rect key="frame" x="334" y="112" width="60" height="24"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="24" id="o9S-Jg-gWe"/>
+                                    <constraint firstAttribute="width" constant="60" id="sUp-Vx-hNp"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="The Godfather" translatesAutoresizingMaskIntoConstraints="NO" id="CPv-Sg-fXp">
+                                <rect key="frame" x="57" y="206" width="300" height="450"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="1Jb-1P-FxA"/>
+                                    <constraint firstAttribute="height" constant="450" id="INA-KV-kCh"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Рейтинг этого фильма больше чем 6?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="A5x-uf-qNj">
+                                <rect key="frame" x="20" y="672" width="374" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="RVO-dB-Gij"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="23"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z4U-dZ-h1A">
+                                <rect key="frame" x="40" y="824" width="100" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="27j-kt-a0A"/>
+                                    <constraint firstAttribute="width" constant="100" id="8d3-Ra-2zj"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Нет"/>
+                                <connections>
+                                    <action selector="noButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Bf7-JV-wBa"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qxe-75-QoT">
+                                <rect key="frame" x="274" y="824" width="100" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="13Z-Ys-8TG"/>
+                                    <constraint firstAttribute="height" constant="48" id="iIH-K6-qtK"/>
+                                </constraints>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" title="Да"/>
+                                <connections>
+                                    <action selector="yesButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ur2-hl-meg"/>
+                                </connections>
+                            </button>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="WMs-qe-KSl" secondAttribute="trailing" constant="20" id="92M-US-WfH"/>
+                            <constraint firstItem="CPv-Sg-fXp" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="BZN-qs-cKZ"/>
+                            <constraint firstItem="CPv-Sg-fXp" firstAttribute="top" secondItem="WMs-qe-KSl" secondAttribute="bottom" constant="70" id="CjH-PN-5LO"/>
+                            <constraint firstItem="A5x-uf-qNj" firstAttribute="top" secondItem="CPv-Sg-fXp" secondAttribute="bottom" constant="16" id="QhF-8b-pod"/>
+                            <constraint firstItem="Z4U-dZ-h1A" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="40" id="TF4-89-MSu"/>
+                            <constraint firstItem="A5x-uf-qNj" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="YYD-cA-x7x"/>
+                            <constraint firstAttribute="bottom" secondItem="Z4U-dZ-h1A" secondAttribute="bottom" constant="24" id="ddh-Wm-Qq5"/>
+                            <constraint firstItem="WMs-qe-KSl" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="f9U-eD-Y3o"/>
+                            <constraint firstAttribute="trailing" secondItem="Qxe-75-QoT" secondAttribute="trailing" constant="40" id="fmk-uU-U9i"/>
+                            <constraint firstAttribute="bottom" secondItem="Qxe-75-QoT" secondAttribute="bottom" constant="24" id="wjD-hF-NN8"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="A5x-uf-qNj" secondAttribute="trailing" constant="20" id="zZx-WT-wtS"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="counterLabel" destination="WMs-qe-KSl" id="J2W-RJ-DpS"/>
+                        <outlet property="imageView" destination="CPv-Sg-fXp" id="y3Q-Ik-jKw"/>
+                        <outlet property="noButton" destination="Z4U-dZ-h1A" id="3gm-Fe-enM"/>
+                        <outlet property="questionLabel" destination="A5x-uf-qNj" id="ZLF-BY-D6r"/>
+                        <outlet property="yesButton" destination="Qxe-75-QoT" id="j2I-Vb-4io"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-55.072463768115945" y="55.580357142857139"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="The Godfather" width="1192" height="1716"/>
+    </resources>
 </document>
