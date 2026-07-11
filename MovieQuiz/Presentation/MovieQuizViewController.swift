@@ -14,6 +14,34 @@ final class MovieQuizViewController: UIViewController {
     @IBOutlet private weak var noButton: UIButton!
     @IBOutlet private weak var yesButton: UIButton!
 
+    private let backgroundColor = UIColor(
+        red: 26.0 / 255.0,
+        green: 28.0 / 255.0,
+        blue: 35.0 / 255.0,
+        alpha: 1
+    )
+
+    private let buttonBackgroundColor = UIColor(
+        red: 245.0 / 255.0,
+        green: 245.0 / 255.0,
+        blue: 245.0 / 255.0,
+        alpha: 1
+    )
+
+    private let correctBorderColor = UIColor(
+        red: 95.0 / 255.0,
+        green: 194.0 / 255.0,
+        blue: 142.0 / 255.0,
+        alpha: 1
+    )
+
+    private let incorrectBorderColor = UIColor(
+        red: 245.0 / 255.0,
+        green: 107.0 / 255.0,
+        blue: 108.0 / 255.0,
+        alpha: 1
+    )
+
     private let questions: [QuizQuestion] = [
         QuizQuestion(
             imageName: "The Godfather",
@@ -73,10 +101,49 @@ final class MovieQuizViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        view.backgroundColor = backgroundColor
+
+        counterLabel.font =
+            UIFont(name: "YSDisplay-Medium", size: 20)
+            ?? UIFont.systemFont(ofSize: 20, weight: .medium)
+        counterLabel.textColor = .white
+
+        questionLabel.font =
+            UIFont(name: "YSDisplay-Bold", size: 23)
+            ?? UIFont.systemFont(ofSize: 23, weight: .bold)
+        questionLabel.textColor = .white
+        questionLabel.textAlignment = .center
+        questionLabel.numberOfLines = 0
+        questionLabel.lineBreakMode = .byWordWrapping
+
+        imageView.contentMode = .scaleAspectFill
         imageView.layer.cornerRadius = 20
         imageView.clipsToBounds = true
 
+        configureButton(noButton, title: "Нет")
+        configureButton(yesButton, title: "Да")
+
         showCurrentQuestion()
+    }
+
+    private func configureButton(_ button: UIButton, title: String) {
+        let buttonFont =
+            UIFont(name: "YSDisplay-Medium", size: 20)
+            ?? UIFont.systemFont(ofSize: 20, weight: .medium)
+
+        let title = NSAttributedString(
+            string: title,
+            attributes: [
+                .font: buttonFont,
+                .foregroundColor: backgroundColor
+            ]
+        )
+
+        button.setAttributedTitle(title, for: .normal)
+        button.setAttributedTitle(title, for: .disabled)
+        button.backgroundColor = buttonBackgroundColor
+        button.layer.cornerRadius = 10
+        button.clipsToBounds = true
     }
 
     private func showCurrentQuestion() {
@@ -98,9 +165,9 @@ final class MovieQuizViewController: UIViewController {
 
         if isCorrect {
             correctAnswersCount += 1
-            imageView.layer.borderColor = UIColor.systemGreen.cgColor
+            imageView.layer.borderColor = correctBorderColor.cgColor
         } else {
-            imageView.layer.borderColor = UIColor.systemRed.cgColor
+            imageView.layer.borderColor = incorrectBorderColor.cgColor
         }
 
         imageView.layer.borderWidth = 8
@@ -146,7 +213,6 @@ final class MovieQuizViewController: UIViewController {
     private func restartGame() {
         currentQuestionIndex = 0
         correctAnswersCount = 0
-
         showCurrentQuestion()
     }
 
@@ -158,67 +224,3 @@ final class MovieQuizViewController: UIViewController {
         checkAnswer(true)
     }
 }
-
-/*
- Mock-данные
- 
- 
- Картинка: The Godfather
- Настоящий рейтинг: 9,2
- Вопрос: Рейтинг этого фильма больше чем 6?
- Ответ: ДА
-
-
- Картинка: The Dark Knight
- Настоящий рейтинг: 9
- Вопрос: Рейтинг этого фильма больше чем 6?
- Ответ: ДА
-
-
- Картинка: Kill Bill
- Настоящий рейтинг: 8,1
- Вопрос: Рейтинг этого фильма больше чем 6?
- Ответ: ДА
-
-
- Картинка: The Avengers
- Настоящий рейтинг: 8
- Вопрос: Рейтинг этого фильма больше чем 6?
- Ответ: ДА
-
-
- Картинка: Deadpool
- Настоящий рейтинг: 8
- Вопрос: Рейтинг этого фильма больше чем 6?
- Ответ: ДА
-
-
- Картинка: The Green Knight
- Настоящий рейтинг: 6,6
- Вопрос: Рейтинг этого фильма больше чем 6?
- Ответ: ДА
-
-
- Картинка: Old
- Настоящий рейтинг: 5,8
- Вопрос: Рейтинг этого фильма больше чем 6?
- Ответ: НЕТ
-
-
- Картинка: The Ice Age Adventures of Buck Wild
- Настоящий рейтинг: 4,3
- Вопрос: Рейтинг этого фильма больше чем 6?
- Ответ: НЕТ
-
-
- Картинка: Tesla
- Настоящий рейтинг: 5,1
- Вопрос: Рейтинг этого фильма больше чем 6?
- Ответ: НЕТ
-
-
- Картинка: Vivarium
- Настоящий рейтинг: 5,8
- Вопрос: Рейтинг этого фильма больше чем 6?
- Ответ: НЕТ
- */
