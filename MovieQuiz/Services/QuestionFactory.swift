@@ -1,44 +1,108 @@
 import Foundation
 
 final class QuestionFactory: QuestionFactoryProtocol {
-    private struct Movie {
-        let imageName: String
-        let rating: Double
+    enum QuestionFactoryError: LocalizedError {
+        case moviesAreNotLoaded
+        case invalidMovieData
+
+        var errorDescription: String? {
+            switch self {
+            case .moviesAreNotLoaded:
+                return "Фильмы ещё не загружены."
+            case .invalidMovieData:
+                return "Не удалось подготовить вопрос."
+            }
+        }
     }
 
     private weak var delegate: QuestionFactoryDelegate?
-    private var currentQuestionIndex = 0
 
-    private let movies: [Movie] = [
-        Movie(imageName: "The Godfather", rating: 9.2),
-        Movie(imageName: "The Dark Knight", rating: 9.0),
-        Movie(imageName: "Kill Bill", rating: 8.2),
-        Movie(imageName: "The Avengers", rating: 8.0),
-        Movie(imageName: "Deadpool", rating: 8.0),
-        Movie(imageName: "The Green Knight", rating: 6.6),
-        Movie(imageName: "Old", rating: 5.8),
-        Movie(imageName: "The Ice Age Adventures of Buck Wild", rating: 4.3),
-        Movie(imageName: "Tesla", rating: 5.1),
-        Movie(imageName: "Vivarium", rating: 5.9)
-    ]
+    private let moviesLoader: MoviesLoaderProtocol
+    private let networkClient: NetworkClientProtocol
+    private let ratingThreshold = 6.0
 
-    init(delegate: QuestionFactoryDelegate) {
+    private var movies: [Movie] = []
+    private var currentMovieIndex = 0
+
+    init(
+        delegate: QuestionFactoryDelegate,
+        moviesLoader: MoviesLoaderProtocol = MoviesLoader(),
+        networkClient: NetworkClientProtocol = NetworkClient()
+    ) {
         self.delegate = delegate
+        self.moviesLoader = moviesLoader
+        self.networkClient = networkClient
+    }
+
+    func loadData() {
+        moviesLoader.loadMovies { [weak self] result in
+            guard let self else { return }
+
+            switch result {
+            case let .success(movies):
+                self.movies = movies.shuffled()
+                self.currentMovieIndex = 0
+
+                DispatchQueue.main.async { [weak self] in
+                    self?.delegate?.didLoadDataFromServer()
+                }
+
+            case let .failure(error):
+                DispatchQueue.main.async { [weak self] in
+                    self?.delegate?.didFailToLoadData(with: error)
+                }
+            }
+        }
     }
 
     func requestNextQuestion() {
-        guard let movie = movies[safe: currentQuestionIndex] else {
-            delegate?.didReceiveNextQuestion(question: nil)
+        guard !movies.isEmpty else {
+            notifyAboutError(QuestionFactoryError.moviesAreNotLoaded)
             return
         }
 
-        let question = QuizQuestion(
-            imageName: movie.imageName,
-            text: "Рейтинг этого фильма больше чем 6?",
-            correctAnswer: movie.rating > 6
-        )
+        if currentMovieIndex >= movies.count {
+            movies.shuffle()
+            currentMovieIndex = 0
+        }
 
-        currentQuestionIndex += 1
-        delegate?.didReceiveNextQuestion(question: question)
+        let movie = movies[currentMovieIndex]
+        currentMovieIndex += 1
+
+        guard
+            let imageURL = movie.imageURL,
+            let rating = movie.rating
+        else {
+            notifyAboutError(QuestionFactoryError.invalidMovieData)
+            return
+        }
+
+        networkClient.fetch(url: imageURL) { [weak self] result in
+            guard let self else { return }
+
+            switch result {
+            case let .success(imageData):
+                let question = QuizQuestion(
+                    image: imageData,
+                    text: "Рейтинг этого фильма больше чем 6?",
+                    correctAnswer: rating > self.ratingThreshold
+                )
+
+                DispatchQueue.main.async { [weak self] in
+                    self?.delegate?.didReceiveNextQuestion(
+                        question: question
+                    )
+                }
+
+            case let .failure(error):
+                self.notifyAboutError(error)
+            }
+        }
+    }
+
+    private func notifyAboutError(_ error: Error) {
+        DispatchQueue.main.async { [weak self] in
+            self?.delegate?.didFailToLoadData(with: error)
+        }
     }
 }

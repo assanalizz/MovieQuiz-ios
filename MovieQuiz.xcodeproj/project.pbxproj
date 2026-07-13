@@ -28,6 +28,13 @@
 		B50000080000000000000008 /* StatisticServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50000080000000000000008 /* StatisticServiceProtocol.swift */; };
 		B50000090000000000000009 /* StatisticService.swift in Sources */ = {isa = PBXBuildFile; fileRef = C50000090000000000000009 /* StatisticService.swift */; };
 		B500000A000000000000000A /* ResultAlertPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = C500000A000000000000000A /* ResultAlertPresenter.swift */; };
+		B60000010000000000000001 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60000010000000000000001 /* Movie.swift */; };
+		B60000020000000000000002 /* MoviesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60000020000000000000002 /* MoviesResponse.swift */; };
+		B60000030000000000000003 /* MoviesLoaderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60000030000000000000003 /* MoviesLoaderProtocol.swift */; };
+		B60000040000000000000004 /* MoviesLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60000040000000000000004 /* MoviesLoader.swift */; };
+		B60000050000000000000005 /* IMDbAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60000050000000000000005 /* IMDbAPI.swift */; };
+		B60000060000000000000006 /* NetworkClientProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60000060000000000000006 /* NetworkClientProtocol.swift */; };
+		B60000070000000000000007 /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C60000070000000000000007 /* NetworkClient.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,6 +61,13 @@
 		C50000080000000000000008 /* StatisticServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticServiceProtocol.swift; sourceTree = "<group>"; };
 		C50000090000000000000009 /* StatisticService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticService.swift; sourceTree = "<group>"; };
 		C500000A000000000000000A /* ResultAlertPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultAlertPresenter.swift; sourceTree = "<group>"; };
+		C60000010000000000000001 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		C60000020000000000000002 /* MoviesResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesResponse.swift; sourceTree = "<group>"; };
+		C60000030000000000000003 /* MoviesLoaderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesLoaderProtocol.swift; sourceTree = "<group>"; };
+		C60000040000000000000004 /* MoviesLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesLoader.swift; sourceTree = "<group>"; };
+		C60000050000000000000005 /* IMDbAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IMDbAPI.swift; sourceTree = "<group>"; };
+		C60000060000000000000006 /* NetworkClientProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClientProtocol.swift; sourceTree = "<group>"; };
+		C60000070000000000000007 /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -111,6 +125,7 @@
 				8F4738322848DE2A005DF65E /* Presentation */,
 				D50000010000000000000001 /* Models */,
 				D50000020000000000000002 /* Services */,
+				D60000010000000000000001 /* Network */,
 				ADF0CF75283FDAA10075F54D /* Helpers */,
 				8F4738332848DE46005DF65E /* Resources */,
 				AD1ABAB12831907B00B3E448 /* AppDelegate.swift */,
@@ -136,6 +151,8 @@
 				C50000020000000000000002 /* QuizStepViewModel.swift */,
 				C50000030000000000000003 /* QuizResultsViewModel.swift */,
 				C50000040000000000000004 /* GameRecord.swift */,
+				C60000010000000000000001 /* Movie.swift */,
+				C60000020000000000000002 /* MoviesResponse.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -148,8 +165,20 @@
 				C50000070000000000000007 /* QuestionFactory.swift */,
 				C50000080000000000000008 /* StatisticServiceProtocol.swift */,
 				C50000090000000000000009 /* StatisticService.swift */,
+				C60000030000000000000003 /* MoviesLoaderProtocol.swift */,
+				C60000040000000000000004 /* MoviesLoader.swift */,
 			);
 			path = Services;
+			sourceTree = "<group>";
+		};
+		D60000010000000000000001 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				C60000050000000000000005 /* IMDbAPI.swift */,
+				C60000060000000000000006 /* NetworkClientProtocol.swift */,
+				C60000070000000000000007 /* NetworkClient.swift */,
+			);
+			path = Network;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -236,6 +265,13 @@
 				B50000080000000000000008 /* StatisticServiceProtocol.swift in Sources */,
 				B50000090000000000000009 /* StatisticService.swift in Sources */,
 				B500000A000000000000000A /* ResultAlertPresenter.swift in Sources */,
+				B60000010000000000000001 /* Movie.swift in Sources */,
+				B60000020000000000000002 /* MoviesResponse.swift in Sources */,
+				B60000030000000000000003 /* MoviesLoaderProtocol.swift in Sources */,
+				B60000040000000000000004 /* MoviesLoader.swift in Sources */,
+				B60000050000000000000005 /* IMDbAPI.swift in Sources */,
+				B60000060000000000000006 /* NetworkClientProtocol.swift in Sources */,
+				B60000070000000000000007 /* NetworkClient.swift in Sources */,
 				AD5EE5DE284D7887003966EF /* UIColor+Extensions.swift in Sources */,
 				AD7AFA552836189F00399704 /* Array+Extensions.swift in Sources */,
 				AD1ABAB62831907B00B3E448 /* MovieQuizViewController.swift in Sources */,
