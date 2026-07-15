@@ -15,7 +15,7 @@ final class QuestionFactory: QuestionFactoryProtocol {
         }
     }
 
-    private weak var delegate: QuestionFactoryDelegate?
+    weak var delegate: QuestionFactoryDelegate?
 
     private let moviesLoader: MoviesLoaderProtocol
     private let networkClient: NetworkClientProtocol
@@ -25,7 +25,7 @@ final class QuestionFactory: QuestionFactoryProtocol {
     private var currentMovieIndex = 0
 
     init(
-        delegate: QuestionFactoryDelegate,
+        delegate: QuestionFactoryDelegate? = nil,
         moviesLoader: MoviesLoaderProtocol = MoviesLoader(),
         networkClient: NetworkClientProtocol = NetworkClient()
     ) {
